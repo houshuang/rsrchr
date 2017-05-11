@@ -84,10 +84,18 @@
     "mobx": "^2.4.4",
     "mobx-react": "^3.5.5",
     "mobx-react-devtools": "^4.2.5",
+    "mousetrap": "^1.6.1",
     "postcss": "^5.1.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-pdf": "^1.6.1",
+    "react-quill": "^1.0.0-rc.2",
     "react-router": "^2.7.0",
+    "slate": "^0.19.30",
     "source-map-support": "^0.4.2"
+  },
+  "devEngines": {
+    "node": "4.x || 5.x || 6.x || 7.x",
+    "npm": "2.x || 3.x || 4.x"
   }
 }

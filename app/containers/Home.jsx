@@ -1,29 +1,57 @@
-import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
-import { inject, observer } from 'mobx-react'
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { inject, observer } from 'mobx-react';
+import ReactPDF from 'react-pdf';
+import { Editor, Raw } from 'slate';
 
-import styles from './home.css'
+import styles from './home.css';
 
-// Name input
-let NameInput = ({ app: { name, setName } }) => (
-  <input className={styles.input} placeholder="lovely person" value={name} onChange={setName} />
-)
+const initialState = Raw.deserialize(
+  {
+    nodes: [
+      {
+        kind: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            kind: 'text',
+            text: 'A line of text in a paragraph.'
+          }
+        ]
+      }
+    ]
+  },
+  { terse: true }
+);
 
-NameInput.propTypes = {
-  app: PropTypes.object
+// Define our app...
+class EditorComp extends React.Component {
+  // Set the initial state when the app is first constructed.
+  state = {
+    state: initialState
+  };
+
+  // On change, update the app's React state with the new editor state.
+  onChange = state => {
+    this.setState({ state });
+  };
+
+  // Render the editor.
+  render = () => {
+    return <Editor state={this.state.state} onChange={this.onChange} />;
+  };
 }
-
-// Bind Counter Value
-NameInput = inject('app')(observer(NameInput))
-
 // Home component
-const Home = () => (
-  <div>
-    Home
-    <p><Link to="/counter">Go To Counter</Link></p>
+const Home = ({ store: { state: { file, page }, files } }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div>
+        <ReactPDF file={`file:///${file}`} pageIndex={page} />
+      </div><div>
+        <EditorComp />
+      </div>
+    </div>
+  );
+};
 
-    <h3 className={styles.name}>Hello, <NameInput /></h3>
-  </div>
-)
-
-export default Home
+export default inject('store')(observer(Home));
