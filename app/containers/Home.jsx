@@ -2,53 +2,31 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { inject, observer } from 'mobx-react';
 import ReactPDF from 'react-pdf';
-import { Editor, Raw } from 'slate';
+import { Box, ProgressCircle, SearchField } from 'react-desktop/macOs';
 
-import styles from './home.css';
+import BibList from './BibList';
+import EditorComp from './EditorComp';
 
-const initialState = Raw.deserialize(
-  {
-    nodes: [
-      {
-        kind: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            kind: 'text',
-            text: 'A line of text in a paragraph.'
-          }
-        ]
-      }
-    ]
-  },
-  { terse: true }
-);
-
-// Define our app...
-class EditorComp extends React.Component {
-  // Set the initial state when the app is first constructed.
-  state = {
-    state: initialState
-  };
-
-  // On change, update the app's React state with the new editor state.
-  onChange = state => {
-    this.setState({ state });
-  };
-
-  // Render the editor.
-  render = () => {
-    return <Editor state={this.state.state} onChange={this.onChange} />;
-  };
-}
 // Home component
-const Home = ({ store: { state: { file, page }, files } }) => {
+const Home = ({ store: { state: { file, page }, files, updateSearch } }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <div>
-        <ReactPDF file={`file:///${file}`} pageIndex={page} />
+      <div style={{ width: '20%' }}>
+        <SearchField onChange={e => updateSearch(e.target.value)} />
+        <BibList />
+      </div>
+      <div style={{ width: '800px' }}>
+        <ReactPDF
+          width={800}
+          file={`file:///${file}`}
+          pageIndex={page}
+          loading={<ProgressCircle />}
+          error={'No PDF loaded'}
+        />
       </div><div>
-        <EditorComp />
+        <Box width="300px" height="800px">
+          <EditorComp />
+        </Box>
       </div>
     </div>
   );
