@@ -13,10 +13,10 @@ class EditorComp extends React.Component {
       if (data.key === 'j') {
         this.props.store.nextPage();
         event.preventDefault();
-      } else if (data.key === 'k') {
+      } else if (data.key === 'j') {
         this.props.store.prevPage();
         event.preventDefault();
-      } else if (data.key === 'j') {
+      } else if (data.key === 'k') {
         this.props.store.prevPage();
         event.preventDefault();
       } else if (data.key === 'p') {

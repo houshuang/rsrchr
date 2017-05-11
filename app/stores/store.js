@@ -40,7 +40,10 @@ export default class Store {
   };
   @computed get filteredEntries() {
     return this.entries.filter(
-      x => this.state.search === '' || x.EntryKey.includes(this.state.search)
+      x =>
+        !this.state.search ||
+        this.state.search === '' ||
+        x.EntryKey.includes(this.state.search)
     );
   }
 
