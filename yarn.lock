@@ -3531,6 +3531,12 @@ humanize-plus@^1.8.1:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
 
+hummus@^1.0.75:
+  version "1.0.75"
+  resolved "https://registry.yarnpkg.com/hummus/-/hummus-1.0.75.tgz#746d8fb4e819c84ef8092dabf426f620b81cc22e"
+  dependencies:
+    node-pre-gyp "^0.6.13"
+
 hyphenate-style-name@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
@@ -4845,7 +4851,7 @@ node-libs-browser@^1.0.0:
     util "^0.10.3"
     vm-browserify "0.0.4"
 
-node-pre-gyp@^0.6.29:
+node-pre-gyp@^0.6.13, node-pre-gyp@^0.6.29:
   version "0.6.34"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.34.tgz#94ad1c798a11d7fc67381b50d47f8cc18d9799f7"
   dependencies:
@@ -5536,6 +5542,13 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types@^15.5.10:
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+
 prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.9"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.9.tgz#d478eef0e761396942f70c78e772f76e8be747c9"
@@ -5678,7 +5691,7 @@ react-desktop@^0.3.0:
   dependencies:
     radium "^0.18.2"
 
-react-dom@>=15.0, react-dom@^15.3.1:
+react-dom@^15.3.1, react-dom@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -5687,13 +5700,14 @@ react-dom@>=15.0, react-dom@^15.3.1:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
-react-pdf@^1.6.1:
+react-pdf@houshuang/react-pdf:
   version "1.6.1"
-  resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-1.6.1.tgz#dc528ebee6b7e7864db5036d5d52209b67a8e0d1"
+  resolved "https://codeload.github.com/houshuang/react-pdf/tar.gz/4d9f886f063d96851e0db9faf45089b0d7ca88a5"
   dependencies:
     pdfjs-dist "^1.7.339"
-    react ">=15.0"
-    react-dom ">=15.0"
+    prop-types "^15.5.10"
+    react "^15.5.4"
+    react-dom "^15.5.4"
 
 react-portal@^3.1.0:
   version "3.1.0"
@@ -5736,7 +5750,7 @@ react-transform-hmr@^1.0.3:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@>=15.0, react@^15.3.1:
+react@^15.3.1, react@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
