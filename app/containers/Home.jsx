@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { inject, observer } from 'mobx-react';
-import ReactPDF from 'react-pdf';
 import { Box, ProgressCircle, SearchField } from 'react-desktop/macOs';
+import PDF from './PDF';
 
 import BibList from './BibList';
 import EditorComp from './EditorComp';
@@ -16,13 +16,15 @@ const Home = ({ store: { state: { file, page }, files, updateSearch } }) => {
         <BibList />
       </div>
       <div style={{ width: '800px' }}>
-        <ReactPDF
-          width={800}
-          file={`file:///${file}`}
-          pageIndex={page}
-          loading={<ProgressCircle />}
-          error={'No PDF loaded'}
-        />
+        {file &&
+          <PDF
+            width={800}
+            file={`file:///${file}`}
+            scale={1}
+            pageIndex={page}
+            loading={<ProgressCircle />}
+            error={'No PDF loaded'}
+          />}
       </div><div>
         <Box width="300px" height="800px">
           <EditorComp />

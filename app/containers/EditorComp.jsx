@@ -23,7 +23,7 @@ class EditorComp extends React.Component {
         event.preventDefault();
         const newState = state
           .transform()
-          .insertText('\nPage ' + this.props.store.state.page + ': ')
+          .insertText('\nPage ' + this.props.store.state.page + 1 + ': ')
           .apply();
         return newState;
       }

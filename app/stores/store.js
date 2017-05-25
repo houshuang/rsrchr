@@ -62,6 +62,23 @@ export default class Store {
     );
   };
 
+  @action addSelection = () => {
+    let txt;
+    if (window.getSelection) {
+      txt = window.getSelection();
+    } else if (document.getSelection) {
+      txt = document.getSelection();
+    } else if (document.selection) {
+      txt = document.selection.createRange().text;
+    }
+    this.state.text = this.state.text
+      .transform()
+      .insertText(
+        '\nPage ' + this.state.page + 1 + ': ' + txt.toString() + '\n'
+      )
+      .apply();
+  };
+
   @action getBib = file => {
     const parser = new BibtexParser(this.addBib);
     fs.readFile(file, { encoding: 'utf-8' }, (err, data) => parser.parse(data));

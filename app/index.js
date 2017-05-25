@@ -33,11 +33,12 @@ const Routes = (
   </Route>
 );
 
-Mousetrap.bind('k', () => stores.store.prevPage());
-Mousetrap.bind('j', () => stores.store.nextPage());
+Mousetrap.bind('k', () => store.prevPage());
+Mousetrap.bind('j', () => store.nextPage());
+Mousetrap.bind('c', () => store.addSelection());
 
-stores.store.getFiles('/Users/stian/Downloads');
-stores.store.getBib('/Users/stian/Dropbox/Public/short.bib');
+store.getFiles('/Users/stian/Downloads');
+store.getBib('/Users/stian/Dropbox/Public/short.bib');
 
 render(
   <div>
