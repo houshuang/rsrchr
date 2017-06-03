@@ -21,7 +21,7 @@ const Home = ({ store: { state: { file, page }, files, updateSearch } }) => {
             width={800}
             file={`file:///${file}`}
             scale={1}
-            pageIndex={page}
+            page={page}
             loading={<ProgressCircle />}
             error={'No PDF loaded'}
           />}

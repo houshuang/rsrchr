@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Editor } from 'slate';
+import Editor from './Editor';
 
 // Define our app...
 class EditorComp extends React.Component {

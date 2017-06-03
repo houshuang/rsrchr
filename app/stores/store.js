@@ -13,6 +13,17 @@ const initialState = Raw.deserialize(
           {
             kind: 'text',
             text: '\n\n\n\n\n\n\n\n\n\n\n\n\n'
+          },
+          {
+            kind: 'block',
+            type: 'page-no',
+            data: { pageno: 1 },
+            nodes: [
+              {
+                kind: 'text',
+                text: 'This is very important, do you understand me?'
+              }
+            ]
           }
         ]
       }
@@ -24,11 +35,12 @@ const initialState = Raw.deserialize(
 export default class Store {
   @observable state = {
     file: '',
-    page: 0,
+    page: 1,
     text: initialState,
     ref: undefined,
     search: ''
   };
+  @observable refs = {};
   @observable files = [];
   @observable entries = [];
   @action updateSearch = search => {
@@ -46,10 +58,31 @@ export default class Store {
         x.EntryKey.includes(this.state.search)
     );
   }
+  @action setCanvasRef = e => this.refs.canvas = e;
+  @action setTextRef = e => this.refs.divref = e;
+  @action copyImage = () => {
+    const snip = this.refs.canvas.getContext('2d');
+    const imgData = snip.getImageData(10, 10, 250, 250);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 240;
+    canvas.height = 240;
+    const ctx = canvas.getContext('2d');
+    ctx.putImageData(imgData, 0, 0);
+    const dataUri = canvas.toDataURL('image/png');
+    this.state.text = this.state.text
+      .transform()
+      .insertBlock({
+        type: 'image',
+        isVoid: true,
+        data: { src: dataUri }
+      })
+      .apply();
+  };
 
   @action loadFile = file => {
     this.texts[this.state.file] = this.state.text;
-    this.state = { file, page: 0, text: this.texts[file] || initialState };
+    this.state = { file, page: 1, text: this.texts[file] || initialState };
   };
 
   @action setText = text => {
@@ -73,9 +106,7 @@ export default class Store {
     }
     this.state.text = this.state.text
       .transform()
-      .insertText(
-        '\nPage ' + this.state.page + 1 + ': ' + txt.toString() + '\n'
-      )
+      .insertText('\nPage ' + this.state.page + ': ' + txt.toString() + '\n')
       .apply();
   };
 

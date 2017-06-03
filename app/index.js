@@ -36,6 +36,7 @@ const Routes = (
 Mousetrap.bind('k', () => store.prevPage());
 Mousetrap.bind('j', () => store.nextPage());
 Mousetrap.bind('c', () => store.addSelection());
+Mousetrap.bind('i', () => store.copyImage());
 
 store.getFiles('/Users/stian/Downloads');
 store.getBib('/Users/stian/Dropbox/Public/short.bib');
